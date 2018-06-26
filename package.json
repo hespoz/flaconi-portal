@@ -40,6 +40,7 @@
     "react-dom": "^16.4.1",
     "react-infinite": "^0.13.0",
     "react-redux": "^5.0.7",
+    "react-stars": "^2.2.5",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^5.1.1",
