@@ -1,31 +1,54 @@
 import {
     FETCH_PRODUCTS,
-    SET_LOADING_STATE
+    FETCH_OPTIONS
 } from "../commons/constants"
 
-import axios from 'axios'
+import _ from 'lodash'
+import productList from './productlist'
+import optionsList from './optionsList'
 
-export function fetchProducts(step) {
+export function fetchProducts(step, filter = {
+    brand:[],
+    size:[],
+    type:[],
+    sort:''
+}) {
     return async (dispatch) => {
 
-        const productList = await axios.get('https://raw.githubusercontent.com/Flaconi/coding-challenges/master/senior-frontend-engineer/resources/productlist.json')
+        //The timeout emulate the delay with the API. Just put it to show the loading in the frontend.
+        setTimeout(() => {
 
-        dispatch({
-            type: FETCH_PRODUCTS,
-            productList: productList.data
-        })
+            let productListFiltered = _.filter(productList, (product) => {
+
+                const byBrand = filter.brand.length === 0 ? true : _.map(filter.brand, 'value').includes(product.brand)
+                const bySize = filter.size.length === 0 ? true : _.map(filter.size, 'value').includes(product.size)
+                const byType = filter.type.length === 0 ? true : _.map(filter.type, 'value').includes(product.type)
+
+                return byBrand && bySize && byType;
+            })
+
+            if(filter.sort !== ''){
+                productListFiltered = _.orderBy(productListFiltered, ['price'], [filter.sort])
+            }
+
+            dispatch({
+                type: FETCH_PRODUCTS,
+                productList: _.take(productListFiltered, step),
+                step: step,
+                hasMore: step < productListFiltered.length
+            })
+        }, 1000)
+
 
     }
 }
 
-export function setLoadingState() {
+export function fetchOptions() {
     return async (dispatch) => {
-
         dispatch({
-            type: SET_LOADING_STATE,
-            loading: true
+            type: FETCH_OPTIONS,
+            optionsList: optionsList
         })
-
     }
 }
 

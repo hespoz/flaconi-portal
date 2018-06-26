@@ -1,88 +1,73 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchProducts, setLoadingState} from './actions/productAction'
-import ReactStars from 'react-stars'
+import {fetchProducts, fetchOptions} from './actions/productAction'
 
-import './App.scss';
+import Filters from './components/Filters'
+import Products from './components/Products'
+
+import 'react-select/dist/react-select.css'
+import './App.scss'
 
 
 @connect((store) => {
     return {
+        optionsList: store.products.optionsList,
         productList: store.products.productList,
-        step: store.products.step
+        step: store.products.step,
+        hasMore: store.products.hasMore
     }
 })
 class App extends Component {
 
     state = {
-        loading: true
+        brand:[],
+        size:[],
+        type:[],
+        sort:''
     }
 
     componentDidMount = () => {
         this.props.dispatch(fetchProducts(this.props.step))
+        this.props.dispatch(fetchOptions())
     }
 
-    renderLoading = () => {
-        return <div>
-            Loading...
-        </div>
+    searchProducts = () => {
+        const { brand, size, type, sort } = this.state
+        this.props.dispatch(fetchProducts(this.props.step + 10, {
+            brand,
+            size,
+            type,
+            sort
+        }))
     }
 
-    handleFetchOnScroll = () => {
-        this.props.dispatch(setLoadingState())
-        this.props.dispatch(fetchProducts(this.props.step + 5))
+    handleFilterChange = (parameter, value) => {
+        this.setState({
+            [parameter]:value
+        },()=>{
+            this.searchProducts()
+        })
     }
 
-    calculateScale = (x) => {
-        //100 > 5
-        //50  > Y   > 100y = x5/100
-        console.log((parseInt(x) * 5) / 100)
-        return (parseInt(x) * 5) / 100
-    }
-
-    centsToEuro = (cents) => {
-        return (cents/100).toLocaleString("de-DE", {style:"currency", currency:"EUR"})
-    }
 
     render() {
+
+        const { hasMore, optionsList, productList } = this.props
+
         return (
             <div className='container'>
-                <div className='row'>
+
+                    <header>
+                        LOGO
+                    </header>
 
 
-                    {this.props.productList.map((product) => {
-                        return (
-                            <div className='product-list-container'>
-                                <div className='item-container'>
-                                    <header>
-                                        <img src={product.image} className='img-fluid' alt={product.name}/>
-                                    </header>
-                                    <section>
-                                        <div><b>{product.brand}</b></div>
-                                        <div><b>{product.type}</b></div>
-                                    </section>
-                                    <footer>
+                    <Filters {...this.state} optionsList={optionsList} handleFilterChange={this.handleFilterChange}/>
 
-                                        <div>
-                                            ab {this.centsToEuro(product.price)} / {product.size}
-                                        </div>
-                                        <ReactStars
-                                            count={5}
-                                            value={this.calculateScale(product.rating)}
-                                            size={24}
-                                            edit={false}
-                                            color1={'white'}
-                                            color2={'gray'} />
-                                    </footer>
-                                </div>
-                            </div>
-                        )
-                    })}
-
-
-                </div>
-
-
+                    <Products
+                        productList={productList}
+                        hasMore={hasMore}
+                        searchProducts={this.searchProducts}/>
             </div>
         );
     }

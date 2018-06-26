@@ -1,0 +1,31 @@
+{
+  "brandList":[
+    { "value": "Jean Paul Gaultier", "label": "Jean Paul Gaultier" },
+    { "value": "Lancôme", "label": "Lancôme" },
+    { "value": "Paco Rabanne", "label": "Paco Rabanne" },
+    { "value": "Hugo Boss", "label": "Hugo Boss" },
+    { "value": "Giorgio Armani", "label": "Giorgio Armani" },
+    { "value": "Yves Saint Laurent", "label": "Yves Saint Laurent" },
+    { "value": "Chloé", "label": "Chloé" },
+    { "value": "Dior", "label": "Dior" },
+    { "value": "Guerlain", "label": "Guerlain" },
+    { "value": "Narciso Rodriguez", "label": "Narciso Rodriguez" },
+    { "value": "Issey Miyake", "label": "Issey Miyake" },
+    { "value": "Dolce & Gabbana", "label": "Dolce & Gabbana" },
+    { "value": "Lacoste", "label": "Lacoste" },
+    { "value": "Viktor & Rolf", "label": "Viktor & Rolf" },
+    { "value": "Emporio Armani", "label": "Emporio Armani" }
+  ],
+  "sizeList":[
+    { "value": "25ML", "label": "25ML" },
+    { "value": "30ML", "label": "30ML" },
+    { "value": "40ML", "label": "40ML" },
+    { "value": "50ML", "label": "50ML" },
+    { "value": "60ML", "label": "60ML" }
+  ],
+  "typeList": [
+    { "value": "Eau de Parfum", "label": "Eau de Parfum" },
+    { "value": "Eau de Toilette", "label": "Eau de Toilette" },
+    { "value": "Parfum", "label": "Parfum" }
+  ]
+}

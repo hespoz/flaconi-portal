@@ -1,28 +1,31 @@
 import {
     FETCH_PRODUCTS,
-    SET_LOADING_STATE
+    FETCH_OPTIONS
 } from "../commons/constants"
 
 export default function reducer(state = {
+    optionsList:null,
     productList:[],
-    loading: false,
-    step:5
+    hasMore: true,
+    step:10
 }, action) {
     switch (action.type) {
         case FETCH_PRODUCTS:
             return {
                 ...state,
                 productList:action.productList,
-                loading:false,
+                hasMore:action.hasMore,
                 step: action.step
             }
             break;
-        case SET_LOADING_STATE:
+
+        case FETCH_OPTIONS:
             return {
                 ...state,
-                loading:true
+                optionsList:action.optionsList
             }
             break;
+
         default:
             break;
     }
