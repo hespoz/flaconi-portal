@@ -1,17 +1,17 @@
-#Flaconi portal challenge
+# Flaconi portal challenge
 
-##Demo
+## Demo
 
 Just go to https://hespoz.github.io/flaconi-portal/
 
-###Features
+### Features
 
 * Filters
 * Sort by price
 * Pagination using scroll
 * Responsive
 
-###Build
+### Build
 
 `$ npm install `
 
@@ -19,7 +19,7 @@ Just go to https://hespoz.github.io/flaconi-portal/
 
 After execute this commands the bundle will be located at `/build` (this is what will be deployed at AWS or Heroku)
 
-###Run
+### Run
 
 `$ npm install `
 
