@@ -1,0 +1,42 @@
+
+@mixin flex {
+  display:flex;
+  flex-direction: column;
+}
+
+@mixin center {
+  align-items: center;
+  justify-content: center;
+}
+
+.item-container {
+  @include flex;
+  width: 100%;
+  padding: 15px;
+  margin-bottom:10px;
+
+  &:hover {
+    border:1px solid #d5d5d5;
+  }
+
+  > section {
+
+    @include flex;
+    @include center;
+    margin-bottom:10px;
+  }
+
+  > footer {
+
+    @include flex;
+    @include center;
+
+
+    .price {
+      color: #83122a;
+      font-weight: 700;
+    }
+
+  }
+
+}

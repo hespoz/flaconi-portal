@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Select from 'react-select'
-
+import './Filters.scss'
+import './react-select.scss'
 
 const newDirection = (sort) => {
     if (sort === '') {
@@ -32,9 +33,9 @@ const Filters = (props) => {
     }
 
     return (
-        <section >
-            <div className='row'>
-                <div className='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
+        <section>
+            <div className='row filter-row'>
+                <div className='col-xs-12 col-sm-12 col-md-4 col-lg-4 field'>
                     <Select
                         name="form-field-name"
                         value={brand}
@@ -46,7 +47,7 @@ const Filters = (props) => {
                     />
                 </div>
 
-                <div className='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
+                <div className='col-xs-12 col-sm-12 col-md-4 col-lg-4 field'>
                     <Select
                         name="form-field-name"
                         value={size}
@@ -58,7 +59,7 @@ const Filters = (props) => {
                     />
                 </div>
 
-                <div className='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
+                <div className='col-xs-12 col-sm-12 col-md-4 col-lg-4 field'>
                     <Select
                         name="form-field-name"
                         value={type}
@@ -71,8 +72,8 @@ const Filters = (props) => {
                 </div>
 
             </div>
-            <div className='row'>
-                <div className='offset-10 col-2' align="right">
+            <div className='row sort-row'>
+                <div className='offset-8 col-4' align="right">
                     <a className='sort' onClick={() => {
                         props.handleFilterChange('sort', newDirection(sort))
                     }}>{sortLabel(sort)}</a>

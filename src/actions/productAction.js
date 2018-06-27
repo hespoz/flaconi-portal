@@ -1,6 +1,7 @@
 import {
     FETCH_PRODUCTS,
-    FETCH_OPTIONS
+    FETCH_OPTIONS,
+    SHOW_LOADER
 } from "../commons/constants"
 
 import _ from 'lodash'
@@ -48,6 +49,14 @@ export function fetchOptions() {
         dispatch({
             type: FETCH_OPTIONS,
             optionsList: optionsList
+        })
+    }
+}
+
+export function showLoader() {
+    return async (dispatch) => {
+        dispatch({
+            type: SHOW_LOADER
         })
     }
 }

@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import ReactStars from 'react-stars'
+import Loader from '../Loader'
 
+import './Products.scss'
 
 const renderItems = (productList) => {
 
@@ -13,9 +15,13 @@ const renderItems = (productList) => {
         return (cents / 100).toLocaleString("de-DE", {style: "currency", currency: "EUR"})
     }
 
-    if(productList.length === 0){
+    if (productList === null) {
+        return null
+    }
+
+    if (productList.length === 0) {
         return <div className='col-12 ' align="center">
-            Not record found
+            <h6>Unfortunately we do not find products with your search criteria</h6>
         </div>
     }
     return productList.map((product) => {
@@ -26,21 +32,20 @@ const renderItems = (productList) => {
                         <img src={product.image} className='img-fluid' alt={product.name}/>
                     </header>
                     <section>
-                        <div><b>{product.brand}</b></div>
-                        <div><b>{product.type}</b></div>
+                        <div><strong>{product.brand}</strong></div>
+                        <div><strong>{product.type}</strong></div>
                     </section>
                     <footer>
-
-                        <div>
+                        <div className='price'>
                             ab {centsToEuro(product.price)} / {product.size}
                         </div>
                         <ReactStars
                             count={5}
                             value={calculateScale(product.rating)}
-                            size={24}
+                            size={12}
                             edit={false}
                             color1={'white'}
-                            color2={'gray'}/>
+                            color2={'black'}/>
                     </footer>
                 </div>
             </div>
@@ -51,7 +56,8 @@ const renderItems = (productList) => {
 
 const Products = (props) => {
 
-    const { hasMore } = props
+    const {productList, hasMore, loading} = props
+
 
     return (
         <section>
@@ -59,10 +65,16 @@ const Products = (props) => {
                 pageStart={0}
                 loadMore={props.searchProducts}
                 hasMore={hasMore}
-                loader={<div className="loader">Loading ...</div>}>
-                <div className='row'>
-                    {renderItems(props.productList)}
-                </div>
+                loader={!loading ? <Loader/> : null}>
+
+                {loading ?
+                    <Loader/>
+                    :
+                    <div className='row'>
+                        {renderItems(productList)}
+                    </div>
+                }
+
             </InfiniteScroll>
         </section>
     )
