@@ -31,8 +31,7 @@ export default function reducer(state = {
         case SHOW_LOADER:
             return {
                 ...state,
-                loading:true,
-                step:0
+                loading:true
             }
 
         default:
