@@ -20,13 +20,13 @@ const renderItems = (productList) => {
     }
 
     if (productList.length === 0) {
-        return <div className='col-12 ' align="center">
+        return <div className='col-12' align="center">
             <h6>Unfortunately we do not find products with your search criteria</h6>
         </div>
     }
-    return productList.map((product) => {
+    return productList.map((product, index) => {
         return (
-            <div className='col-xs-6 col-sm-5 col-md-4 col-lg-3' align="center">
+            <div key={index} className='col-xs-6 col-sm-5 col-md-4 col-lg-3' align="center">
                 <div className='item-container'>
                     <header>
                         <img src={product.image} className='img-fluid' alt={product.name}/>

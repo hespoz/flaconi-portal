@@ -26,3 +26,7 @@ After execute this commands the bundle will be located at `/build` (this is what
 `$ npm start `
 
 This will run the project locally at http://localhost:3000/
+
+### Test
+
+Unfortunately enzyme does not work with decorators, so if you run ´$ npm run test´ it will fail. I tested manually using webstorm and worked just fine. I include the test file anyway just for you to take a look.
